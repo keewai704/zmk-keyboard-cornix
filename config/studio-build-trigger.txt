@@ -1,1 +1,3 @@
 This file exists to make Studio/build configuration changes under build.yaml trigger the repository's path-filtered GitHub Actions workflow.
+
+Studio build validation branch: 2026-08-26.
