@@ -16,7 +16,7 @@
 include:
   # Dongle is the split central in dongle mode. Studio is enabled on the
   # central only; the RPC snippet also keeps all Studio-assignable behaviors.
-  - board: nice_nano/nrf52840/zmk
+  - board: nice_nano//zmk
     shield: cornix_dongle_adapter cornix_dongle_eyelash dongle_display
     snippet: studio-rpc-usb-uart nrf52840-nosd
     cmake-args: -DCONFIG_ZMK_STUDIO=y
@@ -24,27 +24,27 @@ include:
 
   # Standalone/default split mode: left half is the central. Enable the same
   # Studio USB RPC transport here so Studio works over both USB and BLE.
-  - board: cornix_left
+  - board: cornix_left//zmk
     snippet: studio-rpc-usb-uart nrf52840-nosd
     cmake-args: -DCONFIG_ZMK_STUDIO=y
     # shield: cornix_indicator
     artifact-name: cornix_left_default_nosd
 
   # Peripheral halves do not run Studio themselves.
-  - board: cornix_ph_left
+  - board: cornix_ph_left//zmk
     # shield: cornix_indicator
     artifact-name: cornix_left_for_dongle_nosd
 
-  - board: cornix_right
+  - board: cornix_right//zmk
     # shield: cornix_indicator
     artifact-name: cornix_right_nosd
 
-  - board: cornix_right
+  - board: cornix_right//zmk
     shield: settings_reset
     snippet: studio-rpc-usb-uart nrf52840-nosd
     artifact-name: cornix_reset
 
-  - board: nice_nano/nrf52840/zmk
+  - board: nice_nano//zmk
     shield: settings_reset
     snippet: studio-rpc-usb-uart nrf52840-nosd
     artifact-name: reset_nicenano_nosd
