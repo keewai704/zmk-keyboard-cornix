@@ -9,6 +9,12 @@ on:
       - ".github/workflows/build.yml"
     tags-ignore:
       - "*"
+  pull_request:
+    paths:
+      - "build.yaml"
+      - "boards/**"
+      - "config/**"
+      - ".github/workflows/build.yml"
 
 jobs:
   build:
