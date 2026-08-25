@@ -13,23 +13,23 @@
 #
 ---
 include:
+  # Dongle is the split central in dongle mode. Studio is enabled on the
+  # central only; the RPC snippet also keeps all Studio-assignable behaviors.
   - board: nice_nano/nrf52840/zmk
     shield: cornix_dongle_adapter cornix_dongle_eyelash dongle_display
     snippet: studio-rpc-usb-uart nrf52840-nosd
+    cmake-args: -DCONFIG_ZMK_STUDIO=y
     artifact-name: cornix_dongle_nosd
-  # dongle screen not yet supports zephyr4
-  # - board: seeeduino_xiao_ble
-  #   shield: cornix_dongle_adapter dongle_screen
-  #   snippet: studio-rpc-usb-uart
-  #   artifact-name: cornix_dongle_zds_see
-  # - board: nice_nano
-  #   shield: cornix_dongle_adapter dongle_screen
-  #   snippet: studio-rpc-usb-uart
-  #   artifact-name: cornix_dongle_zds_nano
+
+  # Standalone/default split mode: left half is the central. Enable the same
+  # Studio USB RPC transport here so Studio works over both USB and BLE.
   - board: cornix_left
+    snippet: studio-rpc-usb-uart nrf52840-nosd
+    cmake-args: -DCONFIG_ZMK_STUDIO=y
     # shield: cornix_indicator
     artifact-name: cornix_left_default_nosd
 
+  # Peripheral halves do not run Studio themselves.
   - board: cornix_ph_left
     # shield: cornix_indicator
     artifact-name: cornix_left_for_dongle_nosd
