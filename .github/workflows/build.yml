@@ -3,8 +3,10 @@ on:
   workflow_dispatch:
   push:
     paths:
-      - "boards/*"
-      - "config/*"
+      - "build.yaml"
+      - "boards/**"
+      - "config/**"
+      - ".github/workflows/build.yml"
     tags-ignore:
       - "*"
 
