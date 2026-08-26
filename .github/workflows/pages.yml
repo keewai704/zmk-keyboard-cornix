@@ -1,4 +1,4 @@
-name: Deploy GitHub Pages
+name: Validate GitHub Pages
 
 on:
   push:
@@ -8,11 +8,12 @@ on:
       - ".github/workflows/pages.yml"
       - "docs/**"
       - "scripts/check-pages.py"
+  pull_request:
+    paths:
+      - ".github/workflows/pages.yml"
+      - "docs/**"
+      - "scripts/check-pages.py"
   workflow_dispatch:
-
-concurrency:
-  group: github-pages
-  cancel-in-progress: true
 
 jobs:
   validate:
@@ -25,27 +26,9 @@ jobs:
       - name: Validate static site
         run: python3 scripts/check-pages.py
 
-  deploy:
-    needs: validate
-    runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      pages: write
-      id-token: write
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-      - name: Configure Pages
-        uses: actions/configure-pages@v5
-        with:
-          enablement: true
-      - name: Upload Pages artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: docs
-      - name: Deploy Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+# Upstream includes an automatic GitHub Pages deploy job, but this fork does
+# not currently have Pages enabled. actions/configure-pages cannot create the
+# Pages site with the repository GITHUB_TOKEN ("Resource not accessible by
+# integration"), so deployment is intentionally omitted here. Once Pages is
+# enabled manually in Settings > Pages with Source = GitHub Actions, the
+# upstream deploy job can be restored without affecting the firmware build.
