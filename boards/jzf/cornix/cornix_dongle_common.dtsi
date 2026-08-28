@@ -5,10 +5,13 @@
  */
 #include "cornix-layouts.dtsi"
 #include "cornix_sensors.dtsi"
-/{
+/ {
     chosen {
         zmk,kscan = &mock_kscan;
+        /* Required by the official ZMK Studio keymap/layout RPC. */
+        zmk,physical-layout = &layout_50;
     };
+
     mock_kscan: kscan_1 {
         compatible = "zmk,kscan-mock";
         columns = <0>;
