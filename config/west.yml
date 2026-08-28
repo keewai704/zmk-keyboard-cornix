@@ -30,8 +30,8 @@ manifest:
       revision: main
       clone-depth: 1
 
-    # DYA Studio runtime/configuration extensions. These provide RPC features,
-    # while the keymap itself uses only stock ZMK behavior nodes.
+    # DYA Studio runtime/configuration extensions. Key behaviors stay stock
+    # except Runtime Sensor Rotate, which is required for encoder editing.
     - name: zmk-module-ble-management
       remote: cormoran
       revision: main
@@ -90,6 +90,10 @@ manifest:
       revision: main
       clone-depth: 1
     - name: zmk-feature-fast-keymap
+      remote: cormoran
+      revision: main
+      clone-depth: 1
+    - name: zmk-behavior-runtime-sensor-rotate
       remote: cormoran
       revision: main
       clone-depth: 1
