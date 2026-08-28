@@ -82,6 +82,18 @@
             slow-release;
         };
 
+        /*
+         * Direct Studio unlock from either base layer. This avoids entering the
+         * DEVICE layer just to approve a DYA Studio secured RPC request.
+         * LH1 = left outer thumb (Esc), RH0 = right inner thumb (Enter).
+         */
+        combo_studio_unlock {
+            timeout-ms = <75>;
+            key-positions = <LH1 RH0>;
+            layers = <WIN IPAD>;
+            bindings = <&studio_unlock>;
+        };
+
         combo_tab {
             timeout-ms = <40>;
             require-prior-idle-ms = <100>;
