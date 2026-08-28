@@ -13,25 +13,24 @@ manifest:
     - name: cormoran
       url-base: https://github.com/cormoran
   projects:
+    # DYA Studio's extended RPC features require cormoran's ZMK fork.
     - name: zmk
-      remote: zmkfirmware
-      revision: main
+      remote: cormoran
+      revision: main+dya
       clone-depth: 1
       import:
         file: app/west.yml
+
     - name: zmk-helpers
       remote: urob
       revision: main
       clone-depth: 1
-    #- name: zmk-rgbled-widget
-    #  remote: hitsmaxft
-    #  revision: main
-    #  clone-depth: 1
     - name: zmk-dongle-display
       remote: englmaxi
       revision: main
       clone-depth: 1
-    # DYA Studio extensions. ZMK Studio remains enabled as the shared RPC transport.
+
+    # DYA Studio runtime/configuration extensions.
     - name: zmk-module-ble-management
       remote: cormoran
       revision: main
@@ -48,6 +47,57 @@ manifest:
       remote: cormoran
       revision: main
       clone-depth: 1
+    - name: zmk-feature-input-stream
+      remote: cormoran
+      revision: main
+      clone-depth: 1
+    - name: zmk-feature-module-physical-layout
+      remote: cormoran
+      revision: main
+      clone-depth: 1
+    - name: zmk-feature-custom-settings
+      remote: cormoran
+      revision: main
+      clone-depth: 1
+    - name: zmk-feature-runtime-combo
+      remote: cormoran
+      revision: main
+      clone-depth: 1
+    - name: zmk-feature-runtime-macro
+      remote: cormoran
+      revision: main
+      clone-depth: 1
+    - name: zmk-feature-os-detection
+      remote: cormoran
+      revision: main
+      clone-depth: 1
+    - name: zmk-feature-default-layer
+      remote: cormoran
+      revision: codex/custom-rpc-rewrite
+      clone-depth: 1
+      import: true
+    - name: zmk-feature-device-info
+      remote: cormoran
+      revision: main
+      clone-depth: 1
+    - name: zmk-feature-kscan-diagnostics
+      remote: cormoran
+      revision: main
+      clone-depth: 1
+    - name: zmk-feature-watchdog
+      remote: cormoran
+      revision: main
+      clone-depth: 1
+    - name: zmk-feature-fast-keymap
+      remote: cormoran
+      revision: main
+      clone-depth: 1
+    - name: zmk-behavior-runtime-sensor-rotate
+      remote: cormoran
+      revision: main
+      clone-depth: 1
+
+    # Optional display module retained from the upstream Cornix config.
     #- name: zmk-dongle-screen
     #  remote: janpfischer
     #  revision: main
