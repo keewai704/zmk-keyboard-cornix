@@ -89,6 +89,18 @@ CONFIG_ZMK_KSCAN_DIAGNOSTICS_STUDIO_RPC=y
 CONFIG_ZMK_WATCHDOG=y
 CONFIG_ZMK_WATCHDOG_STUDIO_RPC=y
 
+# Cornix has two split peripherals. The watchdog split relay broadcasts every
+# request to every peripheral and is explicitly not suitable for multi-peripheral
+# builds. Keep local central diagnostics, but do not relay watchdog requests.
+CONFIG_ZMK_WATCHDOG_SPLIT_RELAY=n
+
+# The watchdog module documents a hardware-observed BLE controller timing reset
+# on split centrals under connection/radio load. DYA Studio adds another GATT
+# connection and burst of RPC traffic, so keep fatal/reset-cause logging while
+# removing the periodic task_wdt freeze timers from production firmware.
+CONFIG_ZMK_WATCHDOG_FREEZE_DETECT=n
+CONFIG_ZMK_WATCHDOG_FATAL_DETECT=y
+
 # DYA Studio: runtime input processors and rotary encoder bindings
 CONFIG_ZMK_RUNTIME_INPUT_PROCESSOR=y
 CONFIG_ZMK_RUNTIME_INPUT_PROCESSOR_STUDIO_RPC=y
