@@ -45,6 +45,13 @@ CONFIG_ZMK_HID_REPORT_TYPE_NKRO=n
 CONFIG_BT_MAX_CONN=7
 CONFIG_BT_MAX_PAIRED=7
 
+# nRF52840 BLE stability: a late radio prepare can otherwise hit
+# LL_ASSERT_OVERHEAD and k_oops during connection/re-pairing/Studio traffic.
+# This is the hardware-tested mitigation documented in ZMK issue #3331.
+CONFIG_BT_CTLR_ADVANCED_FEATURES=y
+CONFIG_BT_CTLR_ASSERT_OVERHEAD_START=n
+CONFIG_SOC_FLASH_NRF_PARTIAL_ERASE=y
+
 # ZMK Studio transport. DYA Studio uses the same RPC transport.
 CONFIG_ZMK_STUDIO=y
 CONFIG_ZMK_STUDIO_LOCKING=y
@@ -90,16 +97,9 @@ CONFIG_ZMK_WATCHDOG=y
 CONFIG_ZMK_WATCHDOG_STUDIO_RPC=y
 
 # Cornix has two split peripherals. The watchdog split relay broadcasts every
-# request to every peripheral and is explicitly not suitable for multi-peripheral
-# builds. Keep local central diagnostics, but do not relay watchdog requests.
+# request to every peripheral and upstream explicitly marks it unsuitable for
+# multi-peripheral builds. Local watchdog/fatal/freeze diagnostics remain on.
 CONFIG_ZMK_WATCHDOG_SPLIT_RELAY=n
-
-# The watchdog module documents a hardware-observed BLE controller timing reset
-# on split centrals under connection/radio load. DYA Studio adds another GATT
-# connection and burst of RPC traffic, so keep fatal/reset-cause logging while
-# removing the periodic task_wdt freeze timers from production firmware.
-CONFIG_ZMK_WATCHDOG_FREEZE_DETECT=n
-CONFIG_ZMK_WATCHDOG_FATAL_DETECT=y
 
 # DYA Studio: runtime input processors and rotary encoder bindings
 CONFIG_ZMK_RUNTIME_INPUT_PROCESSOR=y
